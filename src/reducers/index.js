@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import TagsReducer from './reducer_tags'
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  tags: TagsReducer
 });
 
 export default rootReducer;
