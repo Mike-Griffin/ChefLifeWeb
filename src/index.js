@@ -7,6 +7,7 @@ import promise from 'redux-promise'
 
 import Home from './components/home';
 import TagsIndex from './components/tags_index'
+import TagsNew from './components/tags_new'
 import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
@@ -16,6 +17,7 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
+          <Route path="/tags/new" component={TagsNew} />
           <Route path="/tags" component={TagsIndex} />
           <Route path="/" component={Home} />
         </Switch>

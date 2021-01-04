@@ -8,7 +8,7 @@ const ROOT_URL = "http://127.0.0.1:8000/api"
 export function fetchTags() {
     console.log("fetch tags called")
     const request = axios.get(`${ROOT_URL}/recipe/tags`, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
-
+    console.log(request)
     return {
         type: FETCH_TAGS,
         payload: request
