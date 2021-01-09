@@ -4,6 +4,7 @@ import { TOKEN } from '../constants/token'
 export const FETCH_TAGS = "fetch_tags"
 export const FETCH_INGREDIENTS = "fetch_ingredients"
 export const CREATE_TAG = "create_tag"
+export const CREATE_INGREDIENT = "create_ingredient"
 
 const ROOT_URL = "http://127.0.0.1:8000/api"
 
@@ -24,11 +25,17 @@ export function fetchIngredients() {
 }
 
 export function createTag(values) {
-    console.log(values)
     const request = axios.post(`${ROOT_URL}/recipe/tags/`, values, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
-    console.log(request)
     return {
         type: CREATE_TAG,
+        payload: request
+    }
+}
+
+export function createIngredient(values) {
+    const request = axios.post(`${ROOT_URL}/recipe/ingredients/`, values, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
+    return {
+        type: CREATE_INGREDIENT,
         payload: request
     }
 }

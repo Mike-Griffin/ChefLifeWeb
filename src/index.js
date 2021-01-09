@@ -9,6 +9,7 @@ import Home from './components/home';
 import TagsIndex from './components/tags_index'
 import TagsNew from './components/tags_new'
 import IngredientsIndex from './components/ingredients_index'
+import IngredientsNew from './components/ingredients_new'
 import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
@@ -18,6 +19,7 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
+          <Route path="/ingredients/new" component={IngredientsNew} />
           <Route path="/ingredients" component={IngredientsIndex} />
           <Route path="/tags/new" component={TagsNew} />
           <Route path="/tags" component={TagsIndex} />
