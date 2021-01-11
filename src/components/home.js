@@ -8,6 +8,12 @@ class Home extends Component {
                 <div>
                     Home
                 </div>
+
+                <div>
+                    <Link className="btn btn-primary" to="/recipes">
+                        Recipes
+                    </Link>
+                </div>
                 
                 <div>
                     <Link className="btn btn-primary" to="/tags">

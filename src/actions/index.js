@@ -3,6 +3,7 @@ import { TOKEN } from '../constants/token'
 
 export const FETCH_TAGS = "fetch_tags"
 export const FETCH_INGREDIENTS = "fetch_ingredients"
+export const FETCH_RECIPES = "fetch_recipes"
 export const CREATE_TAG = "create_tag"
 export const CREATE_INGREDIENT = "create_ingredient"
 
@@ -20,6 +21,14 @@ export function fetchIngredients() {
     const request = axios.get(`${ROOT_URL}/recipe/ingredients`, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
     return {
         type: FETCH_INGREDIENTS,
+        payload: request
+    }
+}
+
+export function fetchRecipes() {
+    const request = axios.get(`${ROOT_URL}/recipe/recipes`, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
+    return {
+        type: FETCH_RECIPES,
         payload: request
     }
 }
