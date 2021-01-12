@@ -1,7 +1,15 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+import { fetchTags } from '../actions'
+
 
 class RecipesNew extends Component {
+
+    componentDidMount() {
+        this.props.fetchTags()
+    }
 
     renderTextField(field) {
         const { meta: { touched, error } } = field
@@ -22,6 +30,29 @@ class RecipesNew extends Component {
         )
     }
 
+    renderSelect(field) {
+        const { input, label, options } = field
+        return (
+            <div>
+                <label>{label}</label>
+                <select className="form-control" {...input}>
+                    {options}
+                </select>
+            </div>
+        )
+    }
+
+    getTagOptions() {
+        if (!this.props.tags) {
+            return <option>No data</option>
+        }
+        
+        return _.map(this.props.tags, tag => {
+            return <option key={tag.id} value={tag.id}>{tag.name}</option>
+        })
+    
+    }
+
     onSubmit(values) {
         console.log(values)
     }
@@ -36,22 +67,21 @@ class RecipesNew extends Component {
                     name="title"
                     component={this.renderTextField}
                 />
-                <div>
-                    <label>Tag</label>
-                    <div>
-                        <Field name="tag" component="select">
-                            <option></option>
-                            <option value="1">Vegan</option>
-                            <option value="2">Paleo</option>
-                        </Field>
-                    </div>
-                </div>
+                <Field name="tag" label="Tag:" component={this.renderSelect} type="select" className="form-control" options={this.getTagOptions()}/>
+
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         )
     }
 }
 
+function mapStateToProps(state) {
+    return { tags: state.tags }
+}
+
 export default reduxForm({
-    form: 'RecipesNewForm'
-})(RecipesNew)
+    form: 'RecipesNewForm',
+    enableReinitialize : true
+})(
+    connect(mapStateToProps, { fetchTags })(RecipesNew)
+)
