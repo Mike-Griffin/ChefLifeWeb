@@ -6,6 +6,7 @@ export const FETCH_INGREDIENTS = "fetch_ingredients"
 export const FETCH_RECIPES = "fetch_recipes"
 export const CREATE_TAG = "create_tag"
 export const CREATE_INGREDIENT = "create_ingredient"
+export const CREATE_RECIPE = "create_recipe"
 
 const ROOT_URL = "http://127.0.0.1:8000/api"
 
@@ -45,6 +46,18 @@ export function createIngredient(values) {
     const request = axios.post(`${ROOT_URL}/recipe/ingredients/`, values, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
     return {
         type: CREATE_INGREDIENT,
+        payload: request
+    }
+}
+
+export function createRecipe({ tags, title}) {
+
+    const body = {'tags': [tags], 'title': title}
+
+    const request = axios.post(`${ROOT_URL}/recipe/recipes/`, body, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
+    console.log(request)
+    return {
+        type: CREATE_RECIPE,
         payload: request
     }
 }

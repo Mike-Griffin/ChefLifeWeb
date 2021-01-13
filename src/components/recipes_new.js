@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import { fetchTags } from '../actions'
+import { fetchTags, createRecipe } from '../actions'
 
 
 class RecipesNew extends Component {
@@ -54,7 +54,7 @@ class RecipesNew extends Component {
     }
 
     onSubmit(values) {
-        console.log(values)
+        this.props.createRecipe(values)
     }
 
     render() {
@@ -67,7 +67,13 @@ class RecipesNew extends Component {
                     name="title"
                     component={this.renderTextField}
                 />
-                <Field name="tag" label="Tag:" component={this.renderSelect} type="select" className="form-control" options={this.getTagOptions()}/>
+                <Field name="tags" label="Tags:" component={this.renderSelect} type="select" className="form-control" options={this.getTagOptions()}/>
+
+                {/* <Field 
+                    label="Time Minutes"
+                    name="time_minutes"
+                    component={this.renderTextField}
+                /> */}
 
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
@@ -83,5 +89,5 @@ export default reduxForm({
     form: 'RecipesNewForm',
     enableReinitialize : true
 })(
-    connect(mapStateToProps, { fetchTags })(RecipesNew)
+    connect(mapStateToProps, { fetchTags, createRecipe })(RecipesNew)
 )
