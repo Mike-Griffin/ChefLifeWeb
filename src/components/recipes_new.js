@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { fetchTags, createRecipe } from '../actions'
 import CreateableMultiSelectPrompt from '../fields/creatable_multiselect_prompt'
+import { createRecipeRequest } from '../api'
 
 
 
@@ -56,7 +57,13 @@ class RecipesNew extends Component {
     }
 
     onSubmit(values) {
-        this.props.createRecipe(values)
+        console.log("values here")
+        console.log(values)
+        createRecipeRequest(values)
+        .then( (response) => {
+            this.props.createRecipe(response)
+            console.log(response)
+        })
     }
 
     renderTagsAsValues() {

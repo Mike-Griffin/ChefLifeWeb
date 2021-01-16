@@ -50,12 +50,11 @@ export function createIngredient(values) {
     }
 }
 
-export function createRecipe(values) {
+export function createRecipe(response) {
 
-    const request = axios.post(`${ROOT_URL}/recipe/recipes/`, values, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
-    console.log(request)
+    console.log(response)
     return {
         type: CREATE_RECIPE,
-        payload: request
+        payload: response
     }
 }
