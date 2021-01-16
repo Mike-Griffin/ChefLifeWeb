@@ -64,6 +64,9 @@ class RecipesNew extends Component {
             this.props.createRecipe(response)
             console.log(response)
         })
+        .catch((error) => {
+            console.log(error)
+        })
     }
 
     renderTagsAsValues() {
