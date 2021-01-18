@@ -10,3 +10,11 @@ export function createRecipeRequest(values) {
 export function createTagRequest(values) {
     return axios.post(`${ROOT_URL}/recipe/tags/`, values, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
 }
+
+export function deleteTagRequest(id) {
+    return axios.delete(`${ROOT_URL}/recipe/tags/${id}/`, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
+}
+
+export function deleteRecipeRequest(id) {
+    return axios.delete(`${ROOT_URL}/recipe/recipes/${id}/`, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
+}

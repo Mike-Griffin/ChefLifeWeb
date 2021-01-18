@@ -3,17 +3,27 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchTags } from '../actions'
+import { deleteTagRequest } from '../api'
 
 class TagsIndex extends Component {
     componentDidMount() {
         this.props.fetchTags()
     }
 
+    deleteTag(id) {
+        deleteTagRequest(id)
+        .then(() => {this.props.fetchTags()})
+    }
+
     renderTags() {
         return _.map(this.props.tags, tag => {
             return (
                 <li className="list-group-item">
-                    {tag.name}
+                    <div>
+                        {tag.name}
+                        <button onClick={() => this.deleteTag(tag.id)}>Delete</button>
+                    </div>
+                    
                 </li>
             )
         })

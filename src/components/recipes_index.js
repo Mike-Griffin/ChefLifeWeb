@@ -3,10 +3,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchRecipes } from '../actions'
+import { deleteRecipeRequest} from '../api'
 
 class RecipesIndex extends Component {
     componentDidMount() {
         this.props.fetchRecipes()
+    }
+
+    deleteRecipe(id) {
+        deleteRecipeRequest(id)
+        .then(() => {
+            this.props.fetchRecipes()
+        })
     }
 
     renderRecipes() {
@@ -16,6 +24,7 @@ class RecipesIndex extends Component {
             return (
                 <li className="list-group-item">
                     {recipe.title}
+                    <button className="btn btn-danger text-xs-right" onClick={() => this.deleteRecipe(recipe.id)}>Delete</button>
                 </li>
             )
         })
