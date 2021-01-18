@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { createTag } from '../actions' 
+import { createTagRequest } from '../api'
 
 class TagsNew extends Component {   
 
@@ -26,7 +27,11 @@ class TagsNew extends Component {
     }
 
     onSubmit(values) {
-        this.props.createTag(values)
+        createTagRequest(values)
+        .then((response) => {
+            this.props.createTag(response)
+            this.props.history.push('/tags/')
+        })
     }
 
     render() {

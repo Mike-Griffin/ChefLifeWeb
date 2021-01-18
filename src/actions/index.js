@@ -35,10 +35,9 @@ export function fetchRecipes() {
 }
 
 export function createTag(values) {
-    const request = axios.post(`${ROOT_URL}/recipe/tags/`, values, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
     return {
         type: CREATE_TAG,
-        payload: request
+        payload: values
     }
 }
 
