@@ -62,7 +62,7 @@ class RecipesNew extends Component {
         createRecipeRequest(values)
         .then( (response) => {
             this.props.createRecipe(response)
-            console.log(response)
+            this.props.history.push('/recipes/')
         })
         .catch((error) => {
             console.log(error)
