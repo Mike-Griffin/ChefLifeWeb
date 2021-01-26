@@ -1,9 +1,10 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { Field, FieldArray, reduxForm } from 'redux-form'
 import { fetchTags, createRecipe } from '../actions'
 import CreateableMultiSelectPrompt from '../fields/creatable_multiselect_prompt'
+import DynamicFieldArray from '../fields/dynamic_field_array'
 import { createRecipeRequest } from '../api'
 
 
@@ -85,22 +86,12 @@ class RecipesNew extends Component {
                     name="title"
                     component={this.renderTextField}
                 />
-                {/* <Field name="tags" label="Tags:" component={this.renderSelect} type="select" className="form-control" options={this.getTagOptions()}/> */}
-                {/* <CreateableMultiSelectPrompt 
-                    name="tags"
-                    promptValues={this.renderTagsAsValues()}
-                /> */}
                 <Field
                     name="tags"
                     component={CreateableMultiSelectPrompt}
                     options={this.renderTagsAsValues()}
                 />
-                {/* <Field 
-                    label="Time Minutes"
-                    name="time_minutes"
-                    component={this.renderTextField}
-                /> */}
-
+                <DynamicFieldArray />
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         )
