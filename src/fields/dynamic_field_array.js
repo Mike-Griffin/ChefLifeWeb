@@ -40,6 +40,11 @@ class DynamicFieldArray extends React.Component {
                 type="text"
                 component={this.renderTextField}
                 label="Quantity"/>
+              <Field
+                name={`${member}.ingredient`}
+                type="text"
+                component={this.renderTextField}
+                label="Ingredient"/>  
       
             </li>
           )}
