@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, FieldArray, reduxForm } from 'redux-form'
-import { fetchTags, createRecipe } from '../actions'
+import { fetchTags, fetchMeasurements, fetchIngredients, createRecipe } from '../actions'
 import CreateableMultiSelectPrompt from '../fields/creatable_multiselect_prompt'
 import DynamicFieldArray from '../fields/dynamic_field_array'
 import { createRecipeRequest } from '../api'
@@ -13,6 +13,8 @@ class RecipesNew extends Component {
 
     componentDidMount() {
         this.props.fetchTags()
+        this.props.fetchMeasurements()
+        this.props.fetchIngredients()
     }
 
     renderTextField(field) {
@@ -70,9 +72,9 @@ class RecipesNew extends Component {
         })
     }
 
-    renderTagsAsValues() {
-        return _.map(this.props.tags, tag=> {
-            return {'value': `${tag.id}`, 'label': `${tag.name}`}
+    renderObjectsAsValues(objs) {
+        return _.map(objs, obj=> {
+            return {'value': `${obj.id}`, 'label': `${obj.name}`}
         })
     }
 
@@ -89,9 +91,12 @@ class RecipesNew extends Component {
                 <Field
                     name="tags"
                     component={CreateableMultiSelectPrompt}
-                    options={this.renderTagsAsValues()}
+                    options={this.renderObjectsAsValues(this.props.tags)}
                 />
-                <DynamicFieldArray />
+                <DynamicFieldArray 
+                    measurements={this.renderObjectsAsValues(this.props.measurements)}
+                    ingredients={this.renderObjectsAsValues(this.props.ingredients)}
+                />
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         )
@@ -99,12 +104,16 @@ class RecipesNew extends Component {
 }
 
 function mapStateToProps(state) {
-    return { tags: state.tags }
+    return { 
+        tags: state.tags, 
+        measurements: state.measurements,
+        ingredients: state.ingredients, 
+    }
 }
 
 export default reduxForm({
     form: 'RecipesNewForm',
     enableReinitialize : true
 })(
-    connect(mapStateToProps, { fetchTags, createRecipe })(RecipesNew)
+    connect(mapStateToProps, { fetchTags, fetchIngredients, fetchMeasurements, createRecipe })(RecipesNew)
 )

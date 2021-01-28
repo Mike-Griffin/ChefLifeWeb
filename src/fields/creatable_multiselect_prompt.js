@@ -28,9 +28,6 @@ class CreateableMultiSelectPrompt extends Component {
         console.log(newValue);
         console.log(`action: ${actionMeta.action}`);
         console.groupEnd();
-        var tempCreatedVals = this.state.createdVals
-        var tempResponseSelected = this.state.responseSelected
-        var tempPromptSelected = this.state.promptSelected
         switch(actionMeta.action) {
             case('create-option'):
                 console.log("Hopefully I can do a post request here")
@@ -104,7 +101,6 @@ class CreateableMultiSelectPrompt extends Component {
             <CreatableSelect
                 isMulti
                 onChange={this.handleChange}
-                // onChange={value => this.props.input.onChange(value)}
                 options={this.props.options}
              />
         )
