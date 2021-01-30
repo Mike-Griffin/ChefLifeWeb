@@ -2,8 +2,8 @@ import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchRecipes } from '../actions'
-import { deleteRecipeRequest} from '../api'
+import { fetchRecipes } from '../../actions'
+import { deleteRecipeRequest} from '../../api'
 
 class RecipesIndex extends Component {
     componentDidMount() {
@@ -22,8 +22,10 @@ class RecipesIndex extends Component {
         // number of ingredients and other high level stuff
         return _.map(this.props.recipes, recipe => {
             return (
-                <li className="list-group-item">
-                    {recipe.title}
+                <li className="list-group-item" key={recipe.id}>
+                    <Link to={`/recipes/${recipe.id}`}>
+                        {recipe.title}
+                    </Link>
                     <button className="btn btn-danger text-xs-right" onClick={() => this.deleteRecipe(recipe.id)}>Delete</button>
                 </li>
             )

@@ -5,6 +5,7 @@ export const FETCH_TAGS = "fetch_tags"
 export const FETCH_INGREDIENTS = "fetch_ingredients"
 export const FETCH_MEASUREMENTS = "fetch_measurements"
 export const FETCH_RECIPES = "fetch_recipes"
+export const FETCH_RECIPE = "fetch_recipe"
 export const CREATE_TAG = "create_tag"
 export const CREATE_INGREDIENT = "create_ingredient"
 export const CREATE_RECIPE = "create_recipe"
@@ -39,6 +40,14 @@ export function fetchRecipes() {
     const request = axios.get(`${ROOT_URL}/recipe/recipes`, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
     return {
         type: FETCH_RECIPES,
+        payload: request
+    }
+}
+
+export function fetchRecipe(id) {
+    const request = axios.get(`${ROOT_URL}/recipe/recipes/${id}`, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
+    return {
+        type: FETCH_RECIPE,
         payload: request
     }
 }
