@@ -9,6 +9,7 @@ export const FETCH_RECIPE = "fetch_recipe"
 export const FETCH_RECIPE_TAGS = "fetch_recipe_tags"
 export const FETCH_RECIPE_INGREDIENTS = "fetch_recipe_ingredients"
 export const FETCH_RECIPE_MEASUREMENTS = "fetch_recipe_measurements"
+export const CLEAR_RECIPE_VALS = "clear_recipe_vals"
 
 export const CREATE_TAG = "create_tag"
 export const CREATE_INGREDIENT = "create_ingredient"
@@ -77,6 +78,12 @@ export function fetchRecipeMeasurements(queryParm) {
     return {
         type: FETCH_RECIPE_MEASUREMENTS,
         payload: request
+    }
+}
+
+export function clearRecipeVals() {
+    return {
+        type: CLEAR_RECIPE_VALS
     }
 }
 

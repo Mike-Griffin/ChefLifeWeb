@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchRecipe, fetchRecipeTags, fetchRecipeIngredients, fetchRecipeMeasurements } from '../../actions'
+import { fetchRecipe, fetchRecipeTags, fetchRecipeIngredients, fetchRecipeMeasurements, clearRecipeVals } from '../../actions'
 
 class RecipesShow extends React.Component {
     componentDidMount() {
@@ -27,6 +27,10 @@ class RecipesShow extends React.Component {
         //         this.props.fetchRecipeMeasurements(this.getMeasurementsQueryParm())
         //     }
         // }
+    }
+
+    componentWillUnmount() {
+        this.props.clearRecipeVals()
     }
 
     getMeasurementsQueryParm() {
@@ -78,10 +82,11 @@ class RecipesShow extends React.Component {
         })
     }
 
+
     render () {
         const { recipe, recipeTags, recipeIngredients, recipeMeasurements } = this.props
 
-        if (!recipe || recipe.id != this.props.match.params.id) {
+        if (!recipe || (!recipeIngredients && !recipeMeasurements)) {
            return  (
                <div>
                    Loading...
@@ -127,4 +132,4 @@ function mapStateToProps({ recipes, recipeVals }, ownProps) {
     }
 }
 
-export default connect(mapStateToProps, { fetchRecipe, fetchRecipeTags, fetchRecipeIngredients, fetchRecipeMeasurements })(RecipesShow)
+export default connect(mapStateToProps, { fetchRecipe, fetchRecipeTags, fetchRecipeIngredients, fetchRecipeMeasurements, clearRecipeVals })(RecipesShow)
