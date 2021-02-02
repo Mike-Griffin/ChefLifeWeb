@@ -37,41 +37,54 @@ class DynamicFieldArray extends React.Component {
           {touched && error && <span>{error}</span>}
         </li>
         {fields.map((member, index) =>
-          <li key={index}>
-            <button
-              type="button"
-              title="Remove Ingredient"
-              onClick={() => fields.remove(index)}/>
-            <h4>Ingredient #{index + 1}</h4>
-            <Field
-              name={`${member}.order`}
-              type="text"
-              component={this.renderTextField}
-              label="Order"/>
-            <Field
-              name={`${member}.quantity`}
-              type="text"
-              component={this.renderTextField}
-              label="Quantity"/>
-            {/* <Field
-              name={`${member}.measurement`}
-              type="text"
-              component={this.renderTextField}
-              label="Measurement"/> */}
-            <Field
-              name={`${member}.measurement`}
-              component={CreateableSingleSelectPrompt}
-              options={this.props.measurements}
-              createRequest={createMeasurementRequest}
-            />
-            <Field
-              name={`${member}.ingredient`}
-              component={CreateableSingleSelectPrompt}
-              options={this.props.ingredients}
-              createRequest={createIngredientRequest}
-            />
-    
-          </li>
+          <div className = "form-row">
+
+            <li key={index}>
+                <h4>Ingredient #{index + 1}</h4>
+                <div className="form-row">
+                  <div className = "form-group col-md-1">
+                    <button
+                      type="button"
+                      title="Remove Ingredient"
+                      onClick={() => fields.remove(index)}/>
+                  </div>
+                  <div className="form-group col-md-2">
+                    <Field
+                      name={`${member}.order`}
+                      type="text"
+                      component={this.renderTextField}
+                      label="Order"/>
+                  </div>
+                  <div className="form-group col-md-2">
+                    <Field
+                    name={`${member}.quantity`}
+                    type="text"
+                    component={this.renderTextField}
+                    label="Quantity"/>
+                  </div>
+                  <div className="form-group col-md-3">
+                      <Field
+                      name={`${member}.measurement`}
+                      component={CreateableSingleSelectPrompt}
+                      options={this.props.measurements}
+                      createRequest={createMeasurementRequest}
+                    />
+                  </div>
+                <div className="form-group col-md-3">
+                  <Field
+                    name={`${member}.ingredient`}
+                    component={CreateableSingleSelectPrompt}
+                    options={this.props.ingredients}
+                    createRequest={createIngredientRequest}
+                  />
+                </div>
+
+              </div>
+
+      
+            </li>
+          </div>
+
         )}
       </ul>
     )
