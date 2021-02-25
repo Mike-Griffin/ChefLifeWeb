@@ -97,7 +97,9 @@ class RecipesNew extends Component {
                     measurements={this.renderObjectsAsValues(this.props.measurements)}
                     ingredients={this.renderObjectsAsValues(this.props.ingredients)}
                 />
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <div>
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </div>
             </form>
         )
     }

@@ -1,3 +1,15 @@
 form a {
     margin-left: 5px;
 }
+
+ul.list-group:after {
+  clear: both;
+  display: block;
+  content: "";
+}
+
+.field-list {
+    float: left;
+    width: 20%;
+    margin: 100 100 100 100;
+}

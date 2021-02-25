@@ -58,10 +58,13 @@ class CreateableSingleSelectPrompt extends React.Component {
 
     render() {
         return (
-            <CreatableSelect
-                onChange={this.handleChange}
-                options={this.props.options}
-            />
+            <div >
+                <label>{this.props.label}</label>
+                <CreatableSelect
+                    onChange={this.handleChange}
+                    options={this.props.options}
+                />
+            </div>
         )
     }
 }

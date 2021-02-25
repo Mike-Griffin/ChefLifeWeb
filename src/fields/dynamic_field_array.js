@@ -31,71 +31,65 @@ class DynamicFieldArray extends React.Component {
   }
 
   renderIngredientLines = ({ fields, meta: { touched, error } }) => (
-      <ul>
+    <ul className="list-group">
         <li>
           <button type="button" onClick={() => fields.push({})}>Add Ingredient</button>
           {touched && error && <span>{error}</span>}
         </li>
-        {fields.map((member, index) =>
-          <div className = "form-row">
 
-            <li key={index}>
+          {fields.map((member, index) =>
+            <li key={index} className="list-group-item">
+              <div className="row">
+                <button
+                  type="button"
+                  title="Remove Ingredient"
+                  onClick={() => fields.remove(index)}/>
                 <h4>Ingredient #{index + 1}</h4>
-                <div className="form-row">
-                  <div className = "form-group col-md-1">
-                    <button
-                      type="button"
-                      title="Remove Ingredient"
-                      onClick={() => fields.remove(index)}/>
-                  </div>
-                  <div className="form-group col-md-2">
-                    <Field
-                      name={`${member}.order`}
-                      type="text"
-                      component={this.renderTextField}
-                      label="Order"/>
-                  </div>
-                  <div className="form-group col-md-2">
-                    <Field
+                <div className="field-list">
+                  <Field 
+                    name={`${member}.order`}
+                    type="text"
+                    component={this.renderTextField}
+                    label="Order"/>
+                </div>  
+                <div className="field-list">
+                  <Field
                     name={`${member}.quantity`}
                     type="text"
                     component={this.renderTextField}
                     label="Quantity"/>
-                  </div>
-                  <div className="form-group col-md-3">
-                      <Field
-                      name={`${member}.measurement`}
-                      component={CreateableSingleSelectPrompt}
-                      options={this.props.measurements}
-                      createRequest={createMeasurementRequest}
-                    />
-                  </div>
-                <div className="form-group col-md-3">
+                </div>
+
+                <div className="field-list">
+                  <Field
+                    name={`${member}.measurement`}
+                    component={CreateableSingleSelectPrompt}
+                    options={this.props.measurements}
+                    createRequest={createMeasurementRequest}
+                    label="Measurement" />
+                </div>
+
+                <div className="field-list">
                   <Field
                     name={`${member}.ingredient`}
                     component={CreateableSingleSelectPrompt}
                     options={this.props.ingredients}
                     createRequest={createIngredientRequest}
+                    label="Ingredient"
                   />
                 </div>
 
-              </div>
-
-      
+                </div>
             </li>
-          </div>
-
-        )}
-      </ul>
+          )}
+       </ul>
     )
 
     
       
     render() {
         return (
-            <div>
-                <FieldArray name="ingredientLines" component={this.renderIngredientLines}/>
-            </div>
+            <FieldArray name="ingredientLines" component={this.renderIngredientLines}/>
         )
     }
 
