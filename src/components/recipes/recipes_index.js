@@ -7,7 +7,7 @@ import { deleteRecipeRequest} from '../../api'
 
 class RecipesIndex extends Component {
     componentDidMount() {
-        this.props.fetchRecipes()
+        this.props.fetchRecipes(this.props.token)
     }
 
     deleteRecipe(id) {
@@ -52,7 +52,10 @@ class RecipesIndex extends Component {
 }
 
 function mapStateToProps(state) {
-    return { recipes: state.recipes}
+    return { 
+        recipes: state.recipes,
+        token: state.token
+    }
 }
 
 export default connect(mapStateToProps, {fetchRecipes})(RecipesIndex)

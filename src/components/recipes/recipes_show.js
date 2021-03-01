@@ -5,16 +5,17 @@ import { fetchRecipe, fetchRecipeTags, fetchRecipeIngredients, fetchRecipeMeasur
 
 class RecipesShow extends React.Component {
     componentDidMount() {
+        const { token } = this.props
        // if(!this.props.recipe) {
             const { id } = this.props.match.params
-            this.props.fetchRecipe(id)
+            this.props.fetchRecipe(id, token)
             .then(() => {
                 if(this.props.recipe.tags) {
-                    this.props.fetchRecipeTags(this.getValuesQueryParm(this.props.recipe.tags))
+                    this.props.fetchRecipeTags(this.getValuesQueryParm(this.props.recipe.tags), token)
                 }       
                 if(this.props.recipe.ingredientLines) {
-                    this.props.fetchRecipeIngredients(this.getIngredientsQueryParm())
-                    this.props.fetchRecipeMeasurements(this.getMeasurementsQueryParm())
+                    this.props.fetchRecipeIngredients(this.getIngredientsQueryParm(), token)
+                    this.props.fetchRecipeMeasurements(this.getMeasurementsQueryParm(), token)
                 }     
             })
         //}
@@ -123,12 +124,13 @@ class RecipesShow extends React.Component {
     }
 }
 
-function mapStateToProps({ recipes, recipeVals }, ownProps) {
+function mapStateToProps({ token, recipes, recipeVals }, ownProps) {
     return { 
         recipe: recipes[ownProps.match.params.id],
         recipeTags: recipeVals.tags,
         recipeIngredients: recipeVals.ingredients,
-        recipeMeasurements: recipeVals.measurements
+        recipeMeasurements: recipeVals.measurements,
+        token: token
     }
 }
 

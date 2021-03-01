@@ -7,7 +7,19 @@ import { deleteTagRequest } from '../api'
 
 class TagsIndex extends Component {
     componentDidMount() {
-        this.props.fetchTags()
+        const { token, storageLoad } = this.props
+        if(storageLoad.loaded) {
+            if(token) {
+                console.log(token)
+                this.props.fetchTags(token)
+            }
+            else {
+                this.props.history.push('/login/')
+            }
+        }
+        else {
+            console.log('loading')
+        }
     }
 
     deleteTag(id) {
@@ -47,7 +59,11 @@ class TagsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-    return { tags: state.tags }
+    return { 
+        tags: state.tags, 
+        token: state.token,
+        storageLoad: state.storage
+    }
 }
 
 export default connect(mapStateToProps, {fetchTags})(TagsIndex)

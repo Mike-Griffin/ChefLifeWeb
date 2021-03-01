@@ -12,9 +12,9 @@ import { createRecipeRequest } from '../../api'
 class RecipesNew extends Component {
 
     componentDidMount() {
-        this.props.fetchTags()
-        this.props.fetchMeasurements()
-        this.props.fetchIngredients()
+        this.props.fetchTags(token)
+        this.props.fetchMeasurements(token)
+        this.props.fetchIngredients(token)
     }
 
     renderTextField(field) {

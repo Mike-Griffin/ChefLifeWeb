@@ -1,37 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import * as storage from 'redux-storage'
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import promise from 'redux-promise'
 
-import Home from './components/home';
-import TagsIndex from './components/tags_index'
-import TagsNew from './components/tags_new'
-import IngredientsIndex from './components/ingredients_index'
-import IngredientsNew from './components/ingredients_new'
-import RecipesIndex from './components/recipes/recipes_index'
-import RecipesNew from './components/recipes/recipes_new'
-import RecipesShow from './components/recipes/recipes_show'
+import createEngine from 'redux-storage-engine-localstorage'
+import AllRoutes from './all_routes';
 import reducers from './reducers';
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const reducer = storage.reducer(combineReducers(reducers));
+
+const engine = createEngine('my-save-key');
+const storageMiddleware = storage.createMiddleware(engine);
+
+
+const createStoreWithMiddleware = applyMiddleware(promise, storageMiddleware)(createStore)
+const store = createStoreWithMiddleware(reducer);
+
+const load = storage.createLoader(engine);
+load(store);
+
+load(store)
+    .then((newState) => console.log('Loaded state:', newState))
+    .catch(() => console.log('Failed to load previous state'));
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <BrowserRouter>
-      <div>
-        <Switch>
-          <Route path="/recipes/new" component={RecipesNew} />
-          <Route path="/recipes/:id" component={RecipesShow} />
-          <Route path="/recipes" component={RecipesIndex} />
-          <Route path="/ingredients/new" component={IngredientsNew} />
-          <Route path="/ingredients" component={IngredientsIndex} />
-          <Route path="/tags/new" component={TagsNew} />
-          <Route path="/tags" component={TagsIndex} />
-          <Route path="/" component={Home} />
-        </Switch>
-      </div>
-    </BrowserRouter>
+  <Provider store={store}>
+    <AllRoutes />
   </Provider>
   , document.querySelector('.container'));

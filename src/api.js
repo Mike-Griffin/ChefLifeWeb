@@ -26,3 +26,8 @@ export function deleteTagRequest(id) {
 export function deleteRecipeRequest(id) {
     return axios.delete(`${ROOT_URL}/recipe/recipes/${id}/`, {headers: { 'Authorization': `Bearer ${TOKEN}`}})
 }
+
+export function tokenRequest(values) {
+    console.log(values)
+    return axios.post(`${ROOT_URL}/user/token/`, values)
+}

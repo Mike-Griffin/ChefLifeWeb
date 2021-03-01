@@ -6,7 +6,7 @@ import { fetchIngredients } from '../actions'
 
 class IngredientsIndex extends Component {
     componentDidMount() {
-        this.props.fetchIngredients()
+        this.props.fetchIngredients(this.props.token)
     }
 
     renderIngredients() {
@@ -37,7 +37,10 @@ class IngredientsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-    return { ingredients: state.ingredients }
+    return { 
+        ingredients: state.ingredients,
+        token: state.token
+     }
 }
 
 export default connect(mapStateToProps, {fetchIngredients})(IngredientsIndex)
