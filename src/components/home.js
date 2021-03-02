@@ -14,33 +14,43 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
-                <div>
+            <div className="container">
+                <header className="header">
                     Home
-                </div>
+                </header>
+                <div className="content">                
+                    <nav className="sidebar">
+                        <ul className="side-nav">
 
-                <div>
-                    <Link className="btn btn-primary" to="/login">
-                        Login
-                    </Link>
-                </div>
 
-                <div>
-                    <Link className="btn btn-primary" to="/recipes">
-                        Recipes
-                    </Link>
-                </div>
-                
-                <div>
-                    <Link className="btn btn-primary" to="/tags">
-                        Tags
-                    </Link>
-                </div>
+                            <li className="side-nav__item">
+                                <Link className="side-nav__link" to="/login">
+                                    Login
+                                </Link>
+                            </li>
 
-                <div>
-                    <Link className="btn btn-primary" to="/ingredients">
-                        Ingredients
-                    </Link>
+                            <li className="side-nav__item">
+                                <Link className="side-nav__link" to="/recipes">
+                                    Recipes
+                                </Link>
+                            </li>
+                            
+                            <li className="side-nav__item">
+                                <Link className="side-nav__link" to="/tags">
+                                    Tags
+                                </Link>
+                            </li>
+
+                            <li className="side-nav__item">
+                                <Link className="side-nav__link" to="/ingredients">
+                                    Ingredients
+                                </Link>
+                            </li>
+                        </ul>
+                    </nav>
+                    <main className="recipe-view">
+                        Most Recent Recipes or something go here
+                    </main>
                 </div>
 
             </div>
