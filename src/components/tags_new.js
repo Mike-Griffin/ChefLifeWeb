@@ -27,7 +27,7 @@ class TagsNew extends Component {
     }
 
     onSubmit(values) {
-        createTagRequest(values)
+        createTagRequest(this.props.token, values)
         .then((response) => {
             this.props.createTag(response)
             this.props.history.push('/tags/')
@@ -61,9 +61,15 @@ function validate(values) {
     return errors
 }
 
+function mapStateToProps(state) {
+    return {
+        token: state.token
+    }
+}
+
 export default reduxForm({
     validate,
     form: 'TagsNewForm'
 })(
-    connect(null,{ createTag })(TagsNew)
+    connect(mapStateToProps,{ createTag })(TagsNew)
 )

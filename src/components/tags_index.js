@@ -23,8 +23,8 @@ class TagsIndex extends Component {
     }
 
     deleteTag(id) {
-        deleteTagRequest(id)
-        .then(() => {this.props.fetchTags()})
+        deleteTagRequest(this.props.token, id)
+        .then(() => {this.props.fetchTags(this.props.token)})
     }
 
     renderTags() {

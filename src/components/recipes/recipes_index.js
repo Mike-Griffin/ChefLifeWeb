@@ -11,9 +11,9 @@ class RecipesIndex extends Component {
     }
 
     deleteRecipe(id) {
-        deleteRecipeRequest(id)
+        deleteRecipeRequest(this.props.token, id)
         .then(() => {
-            this.props.fetchRecipes()
+            this.props.fetchRecipes(this.props.token)
         })
     }
 

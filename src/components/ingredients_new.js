@@ -26,7 +26,7 @@ class IngredientsNew extends Component {
     }
 
     onSubmit(values) {
-        this.props.createIngredient(values)
+        this.props.createIngredient(this.state.props, values)
     }
 
     render() {
@@ -56,9 +56,15 @@ function validate(values) {
     return errors
 }
 
+function mapStateToProps(state) {
+    return {
+        token: state.token
+    }
+}
+
 export default reduxForm({
     validate,
     form: 'IngredientsNewForm'
 })(
-    connect(null,{ createIngredient })(IngredientsNew)
+    connect(mapStateToProps,{ createIngredient })(IngredientsNew)
 )

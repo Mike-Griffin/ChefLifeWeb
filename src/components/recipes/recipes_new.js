@@ -12,9 +12,9 @@ import { createRecipeRequest } from '../../api'
 class RecipesNew extends Component {
 
     componentDidMount() {
-        this.props.fetchTags(token)
-        this.props.fetchMeasurements(token)
-        this.props.fetchIngredients(token)
+        this.props.fetchTags(this.props.token)
+        this.props.fetchMeasurements(this.props.token)
+        this.props.fetchIngredients(this.props.token)
     }
 
     renderTextField(field) {
@@ -62,7 +62,7 @@ class RecipesNew extends Component {
     onSubmit(values) {
         console.log("values here")
         console.log(values)
-        createRecipeRequest(values)
+        createRecipeRequest(this.props.token, values)
         .then( (response) => {
             this.props.createRecipe(response)
             this.props.history.push('/recipes/')
@@ -90,10 +90,12 @@ class RecipesNew extends Component {
                 />
                 <Field
                     name="tags"
+                    token={this.props.token}
                     component={CreateableMultiSelectPrompt}
                     options={this.renderObjectsAsValues(this.props.tags)}
                 />
                 <DynamicFieldArray 
+                    token={this.props.token}
                     measurements={this.renderObjectsAsValues(this.props.measurements)}
                     ingredients={this.renderObjectsAsValues(this.props.ingredients)}
                 />
@@ -110,6 +112,7 @@ function mapStateToProps(state) {
         tags: state.tags, 
         measurements: state.measurements,
         ingredients: state.ingredients, 
+        token: state.token
     }
 }
 

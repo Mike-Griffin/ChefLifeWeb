@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import CreatableSelect from 'react-select/creatable'
 
 class CreateableSingleSelectPrompt extends React.Component {
@@ -25,7 +26,7 @@ class CreateableSingleSelectPrompt extends React.Component {
             case('create-option'):
                 console.log("Hopefully I can do a post request here")
                 const newCreatedValue = {'name': `${newValue.value}`}
-                this.props.createRequest(newCreatedValue)
+                this.props.createRequest(this.props.token, newCreatedValue)
                 .then((response) => {
                     console.log(response)
                     this.setState({
@@ -69,4 +70,10 @@ class CreateableSingleSelectPrompt extends React.Component {
     }
 }
 
-export default CreateableSingleSelectPrompt
+function mapStateToProps(state) {
+    return { 
+        token: state.token
+    }
+}
+
+export default connect(mapStateToProps)(CreateableSingleSelectPrompt)

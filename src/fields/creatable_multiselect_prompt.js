@@ -32,7 +32,7 @@ class CreateableMultiSelectPrompt extends Component {
             case('create-option'):
                 console.log("Hopefully I can do a post request here")
                 const newTagValue = {'name': `${newValue[newValue.length - 1].value}`}
-                createTagRequest(newTagValue)
+                createTagRequest(this.props.token, newTagValue)
                 .then((response) => {
                     console.log(response)
                     // this is wrong. Need to figure how to do it correctly
