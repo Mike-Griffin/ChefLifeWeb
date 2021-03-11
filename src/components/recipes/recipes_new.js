@@ -6,7 +6,7 @@ import { fetchTags, fetchMeasurements, fetchIngredients, createRecipe } from '..
 import CreateableMultiSelectPrompt from '../../fields/creatable_multiselect_prompt'
 import DynamicFieldArray from '../../fields/dynamic_field_array'
 import { createRecipeRequest } from '../../api'
-
+import { renderObjectsAsSelectValues } from '../../utils'
 
 
 class RecipesNew extends Component {
@@ -72,11 +72,11 @@ class RecipesNew extends Component {
         })
     }
 
-    renderObjectsAsValues(objs) {
-        return _.map(objs, obj=> {
-            return {'value': `${obj.id}`, 'label': `${obj.name}`}
-        })
-    }
+    // renderObjectsAsValues(objs) {
+    //     return _.map(objs, obj=> {
+    //         return {'value': `${obj.id}`, 'label': `${obj.name}`}
+    //     })
+    // }
 
     render() {
         const { handleSubmit } = this.props
@@ -90,14 +90,12 @@ class RecipesNew extends Component {
                 />
                 <Field
                     name="tags"
-                    token={this.props.token}
                     component={CreateableMultiSelectPrompt}
-                    options={this.renderObjectsAsValues(this.props.tags)}
+                    options={renderObjectsAsSelectValues(this.props.tags)}
                 />
                 <DynamicFieldArray 
-                    token={this.props.token}
-                    measurements={this.renderObjectsAsValues(this.props.measurements)}
-                    ingredients={this.renderObjectsAsValues(this.props.ingredients)}
+                    measurements={renderObjectsAsSelectValues(this.props.measurements)}
+                    ingredients={renderObjectsAsSelectValues(this.props.ingredients)}
                 />
                 <div>
                     <button type="submit" className="btn btn-primary">Submit</button>

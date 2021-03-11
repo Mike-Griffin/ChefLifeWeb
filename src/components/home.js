@@ -30,6 +30,12 @@ class Home extends Component {
                             </li>
 
                             <li className="side-nav__item">
+                                <Link className="side-nav__link" to="/groceryLists">
+                                    Grocery Lists
+                                </Link>
+                            </li>
+
+                            <li className="side-nav__item">
                                 <Link className="side-nav__link" to="/recipes">
                                     Recipes
                                 </Link>

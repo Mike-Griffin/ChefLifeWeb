@@ -30,7 +30,7 @@ class TagsIndex extends Component {
     renderTags() {
         return _.map(this.props.tags, tag => {
             return (
-                <li className="list-group-item">
+                <li className="list-group-item" key={tag.id}>
                     <div>
                         {tag.name}
                         <button onClick={() => this.deleteTag(tag.id)}>Delete</button>

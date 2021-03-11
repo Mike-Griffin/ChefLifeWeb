@@ -11,6 +11,8 @@ import IngredientsNew from './components/ingredients_new'
 import RecipesIndex from './components/recipes/recipes_index'
 import RecipesNew from './components/recipes/recipes_new'
 import RecipesShow from './components/recipes/recipes_show'
+import GroceryListsIndex from './components/grocery_lists_index'
+import GroceryListsNew from './components/grocery_lists_new'
 
 class AllRoutes extends Component {
     render() {
@@ -25,6 +27,8 @@ class AllRoutes extends Component {
                         <Route path="/recipes/new" component={RecipesNew} />
                         <Route path="/recipes/:id" component={RecipesShow} />
                         <Route path="/recipes" component={RecipesIndex} />
+                        <Route path="/groceryLists/new" component={GroceryListsNew} />
+                        <Route path="/groceryLists" component={GroceryListsIndex} />
                         <Route path="/ingredients/new" component={IngredientsNew} />
                         <Route path="/ingredients" component={IngredientsIndex} />
                         <Route path="/tags/new" component={TagsNew} />

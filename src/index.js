@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import * as storage from 'redux-storage'
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import promise from 'redux-promise'
 
 import createEngine from 'redux-storage-engine-localstorage'
